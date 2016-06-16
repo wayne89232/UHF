@@ -11,11 +11,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
+import android.support.design.widget.CoordinatorLayout;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.content.DialogInterface;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.widget.LinearLayout;
 import rfid.ivrjacku1.IvrJackAdapter;
+
 import rfid.ivrjacku1.IvrJackService;
 import rfid.ivrjacku1.IvrJackStatus;
 
@@ -30,8 +38,10 @@ public abstract class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.bOpened = false;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //final CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -83,6 +93,8 @@ public abstract class MainActivity extends AppCompatActivity
                     //MainActivity.this.bSuccess = false;
                     int ret = MainActivity.reader.readEPC(!MainActivity.this.bOpened);
                     System.out.println(ret);
+                    Toast.makeText(MainActivity.this    , ret, Toast.LENGTH_LONG).show();
+
                     /*if (ret != 0 || MainActivity.this.bCancel) {
                         if (ret == -1) {
                             MainActivity.this.cMsg = "Device is running low battery, please charge!";
